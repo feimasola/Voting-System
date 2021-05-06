@@ -22,12 +22,12 @@
 				</div>
 
 				<div class="form-group">
-					<label for="student_id">Student ID</label>
+					<label for="student_id">Civ HR Control nr</label>
 					<input type="text" name="student_id" class="form-control" :value="nominee.student_id" required/>
 				</div>
 
 				<div class="form-group">
-					<label for="course">Course</label>
+					<label for="course">Unit</label>
 					<input type="text" name="course" class="form-control" :value="nominee.course" required/>
 				</div>
 

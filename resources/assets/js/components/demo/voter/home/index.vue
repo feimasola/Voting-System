@@ -3,9 +3,9 @@
 	<div class="col-md-4">
 		<h4>Voter's Information</h4><hr/>
 		<ul class="list-group">
-			<li class="list-group-item"><b>Student ID : </b>{{ data.user.student_id }}</li>
+			<li class="list-group-item"><b>Civ HR Control nr : </b>{{ data.user.student_id }}</li>
 			<li class="list-group-item"><b>Name : </b>{{ data.user.name }}</li>
-			<li class="list-group-item"><b>Course : </b>{{ data.user.course }}</li>
+			<li class="list-group-item"><b>Unit : </b>{{ data.user.course }}</li>
 			<li class="list-group-item" v-if="data.election.status==1">
 				<center>Election hasn't started yet</center>
 			</li>
@@ -43,7 +43,7 @@
 							<th></th>
 							<th>Name</th>
 							<th>Partylist</th>
-							<th>Course</th>
+							<th>Unit</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -73,7 +73,7 @@
 					<div class="col-md-9" style="margin-left: 5px;">
 						<h3><strong><em>"{{ x.motto }}"</em></strong></h3>
 						<b> Name : </b>{{ x.name }}<br/>
-						<b> Course : </b>{{ x.course }}<br/>
+						<b> Unit : </b>{{ x.course }}<br/>
 						<b> Partylist : </b>{{ getPartylist(x.partylist_id) }}<br/><hr/>
 						{{ x.description }}
 					</div>

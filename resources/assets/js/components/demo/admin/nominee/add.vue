@@ -20,12 +20,12 @@
 				</div>
 
 				<div class="form-group">
-					<label for="student_id">Student ID</label>
+					<label for="student_id">Civ HR Control nr</label>
 					<input type="text" name="student_id" class="form-control" required/>
 				</div>
 
 				<div class="form-group">
-					<label for="course">Course</label>
+					<label for="course">Unit</label>
 					<input type="text" name="course" class="form-control" required/>
 				</div>
 
@@ -60,7 +60,7 @@
 					<router-link 
 						:to="{name:'Manage Nominee', query:{position_id:position_id}}" 
 						class="btn btn-default">
-						Submit
+						Back
 					</router-link>
 				</div>
 			</div>

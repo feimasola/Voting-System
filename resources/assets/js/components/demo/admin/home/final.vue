@@ -8,10 +8,10 @@
 					<table class="table table-striped table-condensed">
 						<thead>
 							<tr>
-								<th width="10%">Student ID</th>
+								<th width="15%">Civ HR Control nr</th>
 								<th width="30%">Name</th>
 								<th width="20%">Partylist</th>
-								<th width="20%">Course</th>
+								<th width="20%">Unit</th>
 								<th width="20%">Votes</th>
 							</tr>
 						</thead>
