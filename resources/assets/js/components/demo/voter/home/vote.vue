@@ -25,7 +25,7 @@
 							<th></th>
 							<th>Name</th>
 							<th>Partylist</th>
-							<th>Course</th>
+							<th>Unit</th>
 						</tr>
 					</thead>
 					<tbody>

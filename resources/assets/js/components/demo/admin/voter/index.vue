@@ -17,8 +17,8 @@
 				<thead>
 					<tr>
 						<th>Name</th>
-						<th>Student ID</th>
-						<th>Course</th>
+						<th>Civ HR Control nr</th>
+						<th>Unit</th>
 						<th>Action</th>
 					</tr>
 				</thead>

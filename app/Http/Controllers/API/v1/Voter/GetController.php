@@ -11,6 +11,6 @@ class GetController extends Controller
 {
     public function __invoke()
     {
-    	return Voter::where('election_id', Util::getCurrentElection())->paginate(10);
+    	return Voter::where('election_id', Util::getCurrentElection())->orderBy('name', 'asc')->paginate(20);
     }
 }

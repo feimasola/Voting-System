@@ -33,8 +33,8 @@
 					<tr>
 						<th></th>
 						<th>Name</th>
-						<th>Student ID</th>
-						<th>Course</th>
+						<th>Civ HR Control nr</th>
+						<th>Unit</th>
 						<th>Position</th>
 						<th>Partylist</th>
 						<th>Action</th>

@@ -12,7 +12,7 @@ class LoginController extends Controller
     public function __invoke(Request $request)
     {
     	//return response()->json(Auth::guard('user'));
-    	if (Auth::guard('voter')->attempt(['student_id' => $request->student_id, 'password' => 'admin', 'election_id' => Util::getCurrentElection()])) {
+    	if (Auth::guard('voter')->attempt(['student_id' => $request->student_id, 'password' => 'admin', 'election_id' => Util::getCurrentElection(), 'otp' => $request->otp])) {
     		return response()->json([
     			'status'  =>  'success',
     			'message'  =>  'Login successfully.',

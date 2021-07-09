@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Voting System - Administrator</title>
 	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+	<link rel="shortcut icon" type="image/png" href="/logo.png"/>
 </head>
 <body>
 
