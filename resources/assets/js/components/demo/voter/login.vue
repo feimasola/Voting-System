@@ -9,7 +9,7 @@
 			<form @submit.prevent="login" id="login_form">
 
 				<div class="form-group">
-					<label for="email">Student ID</label>
+					<label for="email">Civ HR Control nr</label>
 					<input type="text" name="student_id" class="form-control" required/>
 				</div>
 
@@ -56,7 +56,7 @@ export default{
 				 	if (this.util.showResult(response, 'success')) {
 				 		localStorage['Access Token'] = `Bearer ${response.data.token}`;
 						this.util.setAuthorization();
-				 		vm.$router.push({name: 'Voter Home'});
+				 		vm.$router.push({name: 'Vote'});
 				 	}
 				 })
 				 .catch(error => {

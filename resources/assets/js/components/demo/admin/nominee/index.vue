@@ -26,17 +26,17 @@
 	<div class="col-md-9 panel panel-default">
 		<div class="panel-body table-responsive">
 			<div class="form-group">
-				<router-link :to="{name: 'Add Nominee', query:{position_id:position_id}}" class="btn btn-success"><i class="fa fa-plus"></i> Add Nominee</router-link>
+				<router-link :to="{name: 'Add Nominee', query:{position_id:position_id}}" class="btn btn-success"><i class="fa fa-plus"></i> Add Candidate</router-link>
 			</div>
 			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th></th>
 						<th>Name</th>
-						<th>Student ID</th>
-						<th>Course</th>
+						<th>Civ HR Control nr</th>
+						<th>Unit</th>
 						<th>Position</th>
-						<th>Partylist</th>
+						<th>Team Name</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -141,7 +141,7 @@ export default{
 			for (var i in partylists)
 				if (partylists[i].id == id)
 					return partylists[i]['name'];
-			return 'No partylists';
+			return 'No Team';
 		}
 	},
 

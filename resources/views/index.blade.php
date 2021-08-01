@@ -7,7 +7,14 @@
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+	<link rel="shortcut icon" type="image/png" href="/logo.png"/>
 
+	<style>
+		body  {
+			background-image: url("/background.jpg");
+			background-color: #cccccc;
+		}
+	</style>
 
 </head>
 <body>
@@ -22,7 +29,7 @@
 	window.config = {
 		"API":"{{ url('api/v1') }}/", //URL OF YOUR API LOCATED
 		"baseURL":"{{ url('') }}/", //URL OF YOUR WEBSITE
-		"storageURL":"{{ config('app.cloudinary_enabled') ? '' : url('storage/') }}", //URL WHERE YOUR IMAGES and OTHER FILEs stored
+		"storageURL":"{{ config('app.cloudinary_enabled') ? '' : url('storage') }}/", //URL WHERE YOUR IMAGES and OTHER FILEs stored
 		"debug": {{ env('APP_DEBUG') }}
 	}
 </script>

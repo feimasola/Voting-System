@@ -22,7 +22,7 @@
 						</router-link>
 						
 						<router-link :to="{name: 'Manage Partylist'}" tag="li">
-							<a href="#">Manage Partylist</a>
+							<a href="#">Manage Team Name</a>
 						</router-link>
 
 						<router-link :to="{name: 'Manage Voter'}" tag="li">
@@ -30,7 +30,7 @@
 						</router-link>
 
 						<router-link :to="{name: 'Manage Nominee'}" tag="li">
-							<a href="#">Manage Nominee</a>
+							<a href="#">Manage Candidate</a>
 						</router-link>
 
 					</ul>

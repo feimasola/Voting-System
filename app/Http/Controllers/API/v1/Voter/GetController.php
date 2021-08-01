@@ -11,6 +11,11 @@ class GetController extends Controller
 {
     public function __invoke()
     {
-    	return Voter::where('election_id', Util::getCurrentElection())->paginate(10);
+        return Voter::where('election_id', Util::getCurrentElection())->orderBy('name', 'asc')->paginate(30);
+    }
+    public function searchData($data){
+        $data = Voter::where('election_id', Util::getCurrentElection())->where('name', 'LIKE', '%' .$data. '%')->get();
+
+        return $data;
     }
 }

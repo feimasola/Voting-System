@@ -15,9 +15,7 @@
 
 					<ul class="nav navbar-nav">
 
-						<router-link :to="{name: 'Voter Home'}" tag="li" exact>
-							<a href="#">Home</a>
-						</router-link>
+
 
 						<router-link :to="{name: 'Vote'}" v-if="data.election.status==2 && !hasVoted()" tag="li" exact>
 							<a href="#">Vote</a>

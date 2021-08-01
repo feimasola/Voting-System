@@ -1,4 +1,4 @@
-<template> 
+<template>
 <div class="row">
 	<div class="col-md-4">
 		<h4>Positions</h4><hr/>
@@ -20,12 +20,20 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">{{ getPosition(position_id) }} - Results as of : {{ last_update }}</div>
 			<div class="panel-body">
-				<div id="chart" style="height: 300px; width: 300px"></div>
+				<div id="barchart" style="height: 500px; width: 600px;"></div>
+			</div>
 			</div>
 		</div>
 	</div>
 </div>
 </template>
+
+<style>
+.inline {
+    display: inline-block;
+    vertical-align: middle;
+    }
+</style>
 
 <script>
 export default{
@@ -57,7 +65,7 @@ export default{
 				.catch(error=>{
 					$.notifyClose();
 					vm.util.showResult(error);
-				})			
+				})
 		},
 
 		refreshResults: function () {
@@ -77,13 +85,57 @@ export default{
 		},
 
 		initChart: function () {
-			$.plot($('#chart'), this.datas, {
-				series: {
-					pie: {
-						show: true,
-						innerRadius: 0.5
-					}
+		var ticks = [];
+		var tick = 0;
+		var data = [];
+		var nominees = this.data.nominees;
+					for (var i in nominees) {
+                if (nominees[i]['position_id']== this.position_id){
+                ticks.push([tick++, nominees[i]['name']]);
 				}
+
+
+        			}
+			$.plot($('#barchart'), this.bars, {
+				series: {
+					bars: {
+						show: true,
+                        barWidth: 0.6,
+                        align: "center",
+                        fill: 0.75,
+                        numbers:{show:true,
+                        Formatter: function(label, series) {
+                                                      var percent= Math.round(series.percent);
+                                                      var number= series.data[0][1];
+                                                      return('</b>:&nbsp;'+ number);
+                                                  }
+                        }
+					}
+				},
+                 xaxis: {
+                    ticks: ticks,
+                    mode: "categories",
+                          showTicks: false,
+                          gridLines: false,
+                          panRange: [0,null],
+                 },
+                     yaxis: {
+                         minTickSize: 1,
+                         tickDecimals: 0
+                     },
+                 legend:{
+                 show: true,
+                 labelFormatter: function(label, series) {
+                                                      var percent= Math.round(series.percent);
+                                                      var number= series.data[0][1];
+                                                      return('&nbsp;<b>'+label+'</b>:&nbsp;'+ number);
+                                                  }
+                 },
+                 valueLabels: {
+                                 show: true
+                             }
+
+
 			})
 		},
 
@@ -123,7 +175,7 @@ export default{
 		},
 
 		datas: function () {
-			//var results = 
+			//var results =
 			var data = [];
 			var nominees = this.data.nominees;
 			for (var i in nominees) {
@@ -135,7 +187,39 @@ export default{
 				}
 			}
 			return data;
-		}
+		},
+
+		bars: function () {
+			//var results =
+			var data = [];
+			var inc = 0;
+			var tick = 0;
+			var nominees = this.data.nominees;
+			for (var i in nominees) {
+				if (nominees[i]['position_id']== this.position_id){
+					let row = [];
+					row['label'] = nominees[i]['name'];
+					row['data'] = [[inc++, this.getVotes(nominees[i]['id'])]];
+					row['ticks'] = [[tick++, nominees[i]['name']]];
+					data.push(row);
+				}
+			}
+			return data;
+		},
+		tickss: function () {
+			//var results =
+			var data = [];
+			var tick = 0;
+			var nominees = this.data.nominees;
+			for (var i in nominees) {
+				if (nominees[i]['position_id']== this.position_id){
+					let row = [];
+					row['ticks'] = [[tick++, nominees[i]['name']]];
+					data.push(row);
+				}
+			}
+			return data;
+		},
 	}
 }
 </script>
