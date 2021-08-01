@@ -8,10 +8,21 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
-					</button>	
-					<a class="navbar-brand" :href="data.baseURL" >Voting System</a>
+					</button>
+						<img src="/logo.png"
+                                                                             contain
+                                                                             height="40px"
+                                                                             width="40px">
+
+
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
+
+                    <ul class="nav navbar-nav">
+
+                    	<a class="navbar-brand" :href="data.baseURL" >Voting System</a>
+
+                    </ul>
 
 					<ul class="nav navbar-nav">
 

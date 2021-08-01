@@ -2,28 +2,37 @@
 <div>
 	<div v-if="!loading">
 		<nav class="navbar navbar-default navbar-fixed-top" id="nav">
-			<div class="container">
+			<div class="container-fluid">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
-					</button>	
-					<a class="navbar-brand" :href="data.baseURL" >Voting System</a>
+					</button>
+						<img src="/logo.png"
+                                                     contain
+                                                     height="40px"
+                                                     width="40px">
+
+
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 
+					<ul class="nav navbar-nav">
+					<a class="navbar-brand" :href="data.baseURL" >Voting System</a>
+
+					</ul>
 					<ul class="nav navbar-nav">
 
 
 
 						<router-link :to="{name: 'Vote'}" v-if="data.election.status==2 && !hasVoted()" tag="li" exact>
 							<a href="#">Vote</a>
-						</router-link>	
+						</router-link>
 
 						<router-link :to="{name: 'Result'}" v-if="data.election.status==2 && hasVoted()" tag="li">
 							<a href="#">Results</a>
-						</router-link>					
+						</router-link>
 
 					</ul>
 					<ul class="nav navbar-right navbar-nav">
