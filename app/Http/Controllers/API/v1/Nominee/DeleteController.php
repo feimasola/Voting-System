@@ -17,7 +17,7 @@ class DeleteController extends Controller
 
     	return response()->json([
     		'status' => 'success',
-    		'message'=> 'Nominee deleted successfully'
+    		'message'=> 'Candidate deleted successfully'
     	]);
     }
 }

@@ -36,8 +36,7 @@ class UpdateController extends Controller
                 })
             ],
     		'course' => 'required',
-    		'position_id' => 'required|exists:nominee,position_id',
-    		'partylist_id' => 'nullable|exists:nominee,partylist_id'
+    		'position_id' => 'required|exists:nominee,position_id'
     	]);
     }
 
@@ -45,7 +44,7 @@ class UpdateController extends Controller
     {
     	$nominee = Nominee::find($id);
     	$default_image = $nominee->image;
-    	    	
+
     	$nominee->name = $request->name;
     	$nominee->course = $request->course;
     	$nominee->student_id = $request->student_id;

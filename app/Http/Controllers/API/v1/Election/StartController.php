@@ -17,7 +17,7 @@ class StartController extends Controller
         if ($this->hasNoNominee()) 
             return response()->json([
                 'status' => 'failed',
-                'message' => 'There is no nominees'
+                'message' => 'There is no Candidates'
             ]);
 
     	if ($this->isElectionStarted())

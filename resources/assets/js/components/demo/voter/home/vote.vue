@@ -106,7 +106,7 @@ export default{
 			let selected = this.selected;
 			for (var i in selected) 
 				if (selected[i]['nominee_id'] == null){
-					this.util.notify('You must vote on all position', 'error');
+					this.util.notify('You must vote for all positions', 'error');
 					return true;
 				}
 			return false;
