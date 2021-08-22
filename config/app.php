@@ -9,7 +9,7 @@ return [
      | 
      */
 
-    'nominee_image' => 'images/nominee/default.jpg',
+    'nominee_image' => 'images/nominee/default.png',
     'nominee_directory' => 'images/nominee',
 
     'cloudinary_enabled' => env('CLOUDINARY_ENABLED', false),

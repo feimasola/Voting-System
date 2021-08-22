@@ -9,10 +9,6 @@
 			<form @submit.prevent="login" id="login_form">
 
 				<div class="form-group">
-					<label for="email">Civ HR Control nr</label>
-					<input type="text" name="student_id" class="form-control" required/>
-				</div>
-				<div class="form-group">
 					<label for="otp">OTP</label>
 					<input type="text" name="otp" class="form-control" required/>
 				</div>

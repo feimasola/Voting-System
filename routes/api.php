@@ -76,10 +76,12 @@ Route::prefix('v1')->group(function(){ //Version 1 of my Rest API
 
 		Route::prefix('voter')->group(function(){
 			Route::post('', 'API\v1\Voter\AddController');
+			Route::post('import', 'API\v1\Voter\ImportController');
 			Route::get('', 'API\v1\Voter\GetController');
 			Route::delete('{id}', 'API\v1\Voter\DeleteController');
 			Route::put('{id}', 'API\v1\Voter\UpdateController');
 			Route::get('search/{data}', 'API\v1\Voter\GetController@searchData');
+			Route::get('previous/{data}', 'API\v1\Voter\GetController@previousData');
 
 		});
 

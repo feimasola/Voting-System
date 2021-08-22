@@ -17,7 +17,7 @@ class AddController extends Controller
 
     	return response()->json([
     		'status' => 'success',
-    		'message'=> 'Partylist added successfully'
+    		'message'=> 'Team Name added successfully'
     	]);
     }
 

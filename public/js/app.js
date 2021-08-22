@@ -1819,11 +1819,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "email" } }, [_vm._v("Civ HR Control nr")]),
+      _c("label", { attrs: { for: "otp" } }, [_vm._v("OTP")]),
       _vm._v(" "),
       _c("input", {
         staticClass: "form-control",
-        attrs: { type: "text", name: "student_id", required: "" }
+        attrs: { type: "text", name: "otp", required: "" }
       })
     ])
   },
@@ -2002,6 +2002,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -2066,19 +2075,8 @@ var render = function() {
                 attrs: { id: "nav" }
               },
               [
-                _c("div", { staticClass: "container" }, [
-                  _c("div", { staticClass: "navbar-header" }, [
-                    _vm._m(0),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "navbar-brand",
-                        attrs: { href: _vm.data.baseURL }
-                      },
-                      [_vm._v("Voting System")]
-                    )
-                  ]),
+                _c("div", { staticClass: "container-fluid" }, [
+                  _vm._m(0),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -2087,6 +2085,17 @@ var render = function() {
                       attrs: { id: "myNavbar" }
                     },
                     [
+                      _c("ul", { staticClass: "nav navbar-nav" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "navbar-brand",
+                            attrs: { href: _vm.data.baseURL }
+                          },
+                          [_vm._v("Voting System")]
+                        )
+                      ]),
+                      _vm._v(" "),
                       _c(
                         "ul",
                         { staticClass: "nav navbar-nav" },
@@ -2180,24 +2189,30 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "navbar-toggle",
-        attrs: {
-          type: "button",
-          "data-toggle": "collapse",
-          "data-target": "#myNavbar"
-        }
-      },
-      [
-        _c("span", { staticClass: "icon-bar" }),
-        _vm._v(" "),
-        _c("span", { staticClass: "icon-bar" }),
-        _vm._v(" "),
-        _c("span", { staticClass: "icon-bar" })
-      ]
-    )
+    return _c("div", { staticClass: "navbar-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "navbar-toggle",
+          attrs: {
+            type: "button",
+            "data-toggle": "collapse",
+            "data-target": "#myNavbar"
+          }
+        },
+        [
+          _c("span", { staticClass: "icon-bar" }),
+          _vm._v(" "),
+          _c("span", { staticClass: "icon-bar" }),
+          _vm._v(" "),
+          _c("span", { staticClass: "icon-bar" })
+        ]
+      ),
+      _vm._v(" "),
+      _c("img", {
+        attrs: { src: "/logo.png", contain: "", height: "40px", width: "40px" }
+      })
+    ])
   },
   function() {
     var _vm = this
@@ -2822,7 +2837,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var selected = this.selected;
 			for (var i in selected) {
 				if (selected[i]['nominee_id'] == null) {
-					this.util.notify('You must vote on all position', 'error');
+					this.util.notify('You must vote for all positions', 'error');
 					return true;
 				}
 			}return false;
@@ -2892,7 +2907,7 @@ var render = function() {
             _vm._l(_vm.data.positions, function(position) {
               return _c("li", { staticClass: "list-group-item" }, [
                 _c("b", [_vm._v(_vm._s(position.name) + " : ")]),
-                _vm._v(_vm._s(_vm.getName(position.id)) + "\r\n\t\t\t")
+                _vm._v(_vm._s(_vm.getName(position.id)) + "\n\t\t\t")
               ])
             }),
             _vm._v(" "),
@@ -3249,13 +3264,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 
 		initChart: function initChart() {
-			$.plot($('#chart'), this.datas, {
-				series: {
-					pie: {
-						show: true,
-						innerRadius: 0.5
-					}
+			var ticks = [];
+			var tick = 0;
+			var data = [];
+			var nominees = this.data.nominees;
+			for (var i in nominees) {
+				if (nominees[i]['position_id'] == this.position_id) {
+					ticks.push([tick++, nominees[i]['name']]);
 				}
+			}
+			$.plot($('#barchart'), this.datas, {
+				series: {
+					bars: {
+						show: true,
+						barWidth: 0.6,
+						align: "center",
+						fill: 0.75,
+						numbers: { show: true,
+							Formatter: function Formatter(label, series) {
+								var percent = Math.round(series.percent);
+								var number = series.data[0][1];
+								return '</b>:&nbsp;' + number;
+							}
+						}
+					}
+				},
+				xaxis: {
+					ticks: ticks,
+					mode: "categories",
+					showTicks: false,
+					gridLines: false,
+					panRange: [0, null]
+				},
+				yaxis: {
+					minTickSize: 1,
+					tickDecimals: 0
+				},
+				legend: {
+					show: true,
+					labelFormatter: function labelFormatter(label, series) {
+						var percent = Math.round(series.percent);
+						var number = series.data[0][1];
+						return '&nbsp;<b>' + label + '</b>:&nbsp;' + number;
+					}
+				},
+				valueLabels: {
+					show: true
+				}
+
 			});
 		},
 
@@ -3293,31 +3349,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 
 		datas: function datas() {
-			//var results = 
+			//var results =
 			var data = [];
+			var inc = 0;
+			var tick = 0;
 			var nominees = this.data.nominees;
 			for (var i in nominees) {
 				if (nominees[i]['position_id'] == this.position_id) {
 					var row = [];
 					row['label'] = nominees[i]['name'];
-					row['data'] = [[1, this.getVotes(nominees[i]['id'])]];
+					row['data'] = [[inc++, this.getVotes(nominees[i]['id'])]];
+					row['ticks'] = [[tick++, nominees[i]['name']]];
 					data.push(row);
 				}
 			}
-			/*let positions = this.data.positions;
-   for (var i in positions) {
-   	if (positions[i]['id'] == this.position_id) {
-   		var row = [];
-   		row['label'] = this.getNominee()
-   	}
-   }
-   for (var i in results) {
-   	if (results[i]['position_id'] != this.position_id) continue;
-   	var row = [];
-   	row['label'] = this.getNominee(results[i]['nominee_id']);
-   	row['data'] = [[1, results[i]['votes']]];
-   	data.push(row);
-   }*/
 			return data;
 		}
 	}
@@ -3412,8 +3457,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-body" }, [
       _c("div", {
-        staticStyle: { height: "300px", width: "300px" },
-        attrs: { id: "chart" }
+        staticStyle: { height: "500px", width: "600px" },
+        attrs: { id: "barchart" }
       })
     ])
   }
@@ -3909,6 +3954,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -3972,18 +4028,7 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "container-fluid" }, [
-                  _c("div", { staticClass: "navbar-header" }, [
-                    _vm._m(0),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "navbar-brand",
-                        attrs: { href: _vm.data.baseURL }
-                      },
-                      [_vm._v("Voting System")]
-                    )
-                  ]),
+                  _vm._m(0),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -3992,6 +4037,17 @@ var render = function() {
                       attrs: { id: "myNavbar" }
                     },
                     [
+                      _c("ul", { staticClass: "nav navbar-nav" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "navbar-brand",
+                            attrs: { href: _vm.data.baseURL }
+                          },
+                          [_vm._v("Voting System")]
+                        )
+                      ]),
+                      _vm._v(" "),
                       _c(
                         "ul",
                         { staticClass: "nav navbar-nav" },
@@ -4168,24 +4224,30 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "navbar-toggle",
-        attrs: {
-          type: "button",
-          "data-toggle": "collapse",
-          "data-target": "#myNavbar"
-        }
-      },
-      [
-        _c("span", { staticClass: "icon-bar" }),
-        _vm._v(" "),
-        _c("span", { staticClass: "icon-bar" }),
-        _vm._v(" "),
-        _c("span", { staticClass: "icon-bar" })
-      ]
-    )
+    return _c("div", { staticClass: "navbar-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "navbar-toggle",
+          attrs: {
+            type: "button",
+            "data-toggle": "collapse",
+            "data-target": "#myNavbar"
+          }
+        },
+        [
+          _c("span", { staticClass: "icon-bar" }),
+          _vm._v(" "),
+          _c("span", { staticClass: "icon-bar" }),
+          _vm._v(" "),
+          _c("span", { staticClass: "icon-bar" })
+        ]
+      ),
+      _vm._v(" "),
+      _c("img", {
+        attrs: { src: "/logo.png", contain: "", height: "40px", width: "40px" }
+      })
+    ])
   },
   function() {
     var _vm = this
@@ -6541,7 +6603,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	methods: {
 		refreshPartylist: function refreshPartylist() {
 			var vm = this;
-			this.util.notify('Refreshing Partylist', 'loading');
+			this.util.notify('Refreshing Team Name', 'loading');
 			axios.get(config.API + 'partylist').then(function (response) {
 				console.log(response);
 				$.notifyClose();
@@ -6560,7 +6622,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 		deletePartylist: function deletePartylist() {
 			var vm = this;
-			this.util.notify('Deleting partylist', 'loading');
+			this.util.notify('Deleting Team Name', 'loading');
 			this.util.hideModal('#delete-partylist-modal');
 			axios.delete(config.API + 'partylist/' + this.id).then(function (response) {
 				$.notifyClose();
@@ -6697,10 +6759,10 @@ var render = function() {
         "modal",
         { attrs: { id: "delete-partylist-modal" } },
         [
-          _c("modal-header", [_vm._v("Delete Partylist")]),
+          _c("modal-header", [_vm._v("Delete Team Name")]),
           _vm._v(" "),
           _c("modal-body", [
-            _c("h2", [_vm._v("Are you sure to delete Partylist?")])
+            _c("h2", [_vm._v("Are you sure to delete Team Name?")])
           ]),
           _vm._v(" "),
           _c("modal-footer", [
@@ -7257,6 +7319,11 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _methods;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
 //
 //
 //
@@ -7351,7 +7418,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		search: '';
 	},
 
-	methods: {
+	methods: (_methods = {
+
+		edit: function edit() {
+			this.data.push({
+				name: '',
+				student_id: '',
+				course: '',
+				election_id: '',
+				otp: ''
+			});
+		},
+
 		searchit: function searchit() {
 			this.searchdata(this.search);
 		},
@@ -7363,7 +7441,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			axios.get(config.API + 'voter/search/' + val).then(function (res) {
 				_this.data.voters.data = res.data;
 				$.notifyClose();
-				console.log(res);
 			});
 		},
 
@@ -7371,34 +7448,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var vm = this;
 			this.util.notify('Refreshing Voter', 'loading');
 			axios.get(config.API + 'voter?page=' + this.current_page).then(function (response) {
-				console.log(response);
+
 				$.notifyClose();
 				vm.data.voters = response.data;
 			}).catch(function (error) {
 				$.notifyClose();
 				vm.util.showResult(error);
 			});
-		},
-
-		edit: function edit(i) {
-			var vm = this;
-			this.data.voter = this.data.voters.data[i];
-			this.$router.push({ name: 'Edit Voter', params: { id: vm.data.voter.id } });
-		},
-
-		deleteVoter: function deleteVoter() {
-			var vm = this;
-			this.util.notify('Deleting voter', 'loading');
-			this.util.hideModal('#delete-voter-modal');
-			axios.delete(config.API + 'voter/' + this.id).then(function (response) {
-				$.notifyClose();
-				if (vm.util.showResult(response, 'success')) vm.refreshVoter();
-			}).catch(function (error) {
-				$.notifyClose();
-				vm.util.showResult(error);
-			});
 		}
-	},
+
+	}, _defineProperty(_methods, 'edit', function edit(i) {
+		var vm = this;
+		this.data.voter = this.data.voters.data[i];
+		this.$router.push({ name: 'Edit Voter', params: { id: vm.data.voter.id } });
+	}), _defineProperty(_methods, 'deleteVoter', function deleteVoter() {
+		var vm = this;
+		this.util.notify('Deleting voter', 'loading');
+		this.util.hideModal('#delete-voter-modal');
+		axios.delete(config.API + 'voter/' + this.id).then(function (response) {
+			$.notifyClose();
+			if (vm.util.showResult(response, 'success')) vm.refreshVoter();
+		}).catch(function (error) {
+			$.notifyClose();
+			vm.util.showResult(error);
+		});
+	}), _methods),
 
 	watch: {
 		'$route.query.page': function $routeQueryPage() {
@@ -7493,7 +7567,7 @@ var render = function() {
                 ],
                 staticClass: "form-control",
                 staticStyle: { height: "33px" },
-                attrs: { type: "search", placeholder: "Search Name..." },
+                attrs: { type: "search", placeholder: "Search Name or SN..." },
                 domProps: { value: _vm.search },
                 on: {
                   keyup: _vm.searchit,
@@ -8354,7 +8428,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		deleteNominee: function deleteNominee() {
 			this.util.hideModal('#delete-nominee-modal');
 			var vm = this;
-			this.util.notify('Deleting nominee', 'loading');
+			this.util.notify('Deleting Candidate', 'loading');
 			axios.delete(config.API + 'nominee/' + this.id).then(function (response) {
 				$.notifyClose();
 				if (vm.util.showResult(response, 'success')) vm.refreshNominee();
@@ -8366,7 +8440,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 		refreshNominee: function refreshNominee() {
 			var vm = this;
-			this.util.notify('Refreshing Nominees', 'loading');
+			this.util.notify('Refreshing Candidate', 'loading');
 			axios.get(config.API + 'nominee').then(function (response) {
 				$.notifyClose();
 				console.log(response);
@@ -8589,10 +8663,10 @@ var render = function() {
         "modal",
         { attrs: { id: "delete-nominee-modal" } },
         [
-          _c("modal-header", [_vm._v("Delete Nominee")]),
+          _c("modal-header", [_vm._v("Delete Candidate")]),
           _vm._v(" "),
           _c("modal-body", [
-            _c("h3", [_vm._v("Are you sure to delete this nominee?")])
+            _c("h3", [_vm._v("Are you sure to delete this Candidate?")])
           ]),
           _vm._v(" "),
           _c("modal-footer", [
@@ -8972,7 +9046,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\r\n\t\t\t\t\t\tCancel\r\n\t\t\t\t\t")]
+                  [_vm._v("\n\t\t\t\t\t\tCancel\n\t\t\t\t\t")]
                 )
               ],
               1

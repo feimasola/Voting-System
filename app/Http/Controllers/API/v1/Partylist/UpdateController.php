@@ -16,7 +16,7 @@ class UpdateController extends Controller
     	$this->updatePartylist($request, $id);
     	return response()->json([
     		'status'	=>	'success',
-    		'message'	=>	'Partylist updated successfully'
+    		'message'	=>	'Team Name updated successfully'
     	]);
     }
 

@@ -13,7 +13,7 @@ class DeleteController extends Controller
     	Partylist::find($id)->delete();
     	return response()->json([
     		'status'	=>	'success',
-    		'message'	=>	'Partylist deleted successfully'
+    		'message'	=>	'Team Name deleted successfully'
     	]);
     }
 }

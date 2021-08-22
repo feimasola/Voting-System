@@ -13,7 +13,7 @@
 			</button>
 		</div>
 		<div style="display:inline-block" class="pull-right">
-		<input class="form-control" type="search" style="height:33px" placeholder="Search Name..." @keyup="searchit" v-model="search">
+		<input class="form-control" type="search" style="height:33px" placeholder="Search Name or SN..." @keyup="searchit" v-model="search">
 
 		</div>
 		<div class="table-responsive">
@@ -64,6 +64,7 @@
 	</div>
 </div>
 
+
 <modal id="delete-voter-modal">
 	<modal-header>Delete Voter</modal-header>
 	<modal-body>
@@ -82,9 +83,10 @@
 export default{
 	data: function () {
 		return {
-			id: 0
+			id: 0,
 		}
         search: ''
+
 	},
 
 	created: function () {
@@ -93,6 +95,21 @@ export default{
 	},
 
 	methods: {
+
+	edit: function () {
+this.data.push({
+                        name: '',
+                        student_id: '',
+                        course: '',
+                        election_id: '',
+                        otp: ''
+            });
+    		},
+
+
+
+
+
 	    searchit() {
 	    this.searchdata(this.search);
 	    },
@@ -101,16 +118,19 @@ export default{
             axios.get(config.API+'voter/search/'+val).then(res => {
                 this.data.voters.data = res.data;
                 $.notifyClose();
-                console.log(res);
+
             })
         },
+
+
+
 
 		refreshVoter: function () {
 			var vm = this;
 			this.util.notify('Refreshing Voter', 'loading');
 			axios.get(config.API+'voter?page='+this.current_page)
 				.then(response=>{
-					console.log(response)
+
 					$.notifyClose();
 					vm.data.voters = response.data;
 				})
@@ -141,6 +161,7 @@ export default{
 				 })
 		}
 	},
+
 
 	watch: {
 		'$route.query.page': function () {

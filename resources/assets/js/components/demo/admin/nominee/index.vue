@@ -70,9 +70,9 @@
 	</div>
 
 	<modal id="delete-nominee-modal">
-		<modal-header>Delete Nominee</modal-header>
+		<modal-header>Delete Candidate</modal-header>
 		<modal-body>
-			<h3>Are you sure to delete this nominee?</h3>
+			<h3>Are you sure to delete this Candidate?</h3>
 		</modal-body>
 		<modal-footer>
 			<button class="btn btn-danger" @click="deleteNominee()">Delete</button>
@@ -101,7 +101,7 @@ export default{
 		deleteNominee: function () {
 			this.util.hideModal('#delete-nominee-modal');
 			var vm = this;
-			this.util.notify('Deleting nominee', 'loading');
+			this.util.notify('Deleting Candidate', 'loading');
 			axios.delete(config.API+'nominee/'+this.id)
 				 .then(response=>{
 				 	$.notifyClose();
@@ -116,7 +116,7 @@ export default{
 		
 		refreshNominee: function () {
 			var vm = this;
-			this.util.notify('Refreshing Nominees', 'loading');
+			this.util.notify('Refreshing Candidate', 'loading');
 			axios.get(config.API+'nominee')
 				.then(response=>{
 					$.notifyClose();

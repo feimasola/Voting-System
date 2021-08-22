@@ -47,9 +47,9 @@
 </div>
 
 <modal id="delete-partylist-modal">
-	<modal-header>Delete Partylist</modal-header>
+	<modal-header>Delete Team Name</modal-header>
 	<modal-body>
-		<h2>Are you sure to delete Partylist?</h2>
+		<h2>Are you sure to delete Team Name?</h2>
 	</modal-body>
 	<modal-footer>
 		<button class="btn btn-danger" @click="deletePartylist()">Delete</button>
@@ -78,7 +78,7 @@ export default{
 	methods: {
 		refreshPartylist: function () {
 			var vm = this;
-			this.util.notify('Refreshing Partylist', 'loading');
+			this.util.notify('Refreshing Team Name', 'loading');
 			axios.get(config.API+'partylist')
 				.then(response=>{
 					console.log(response)
@@ -99,7 +99,7 @@ export default{
 
 		deletePartylist: function () {
 			var vm = this;
-			this.util.notify('Deleting partylist', 'loading');
+			this.util.notify('Deleting Team Name', 'loading');
 			this.util.hideModal('#delete-partylist-modal');
 			axios.delete(config.API+'partylist/'+this.id)
 				 .then(response=>{
