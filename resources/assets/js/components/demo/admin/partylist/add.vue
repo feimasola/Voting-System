@@ -1,7 +1,7 @@
 <template>
 <div class="panel panel-default">
 	<div class="panel-body">
-		<h4>Add Partylist</h4>
+		<h4>Add Team Name</h4>
 		<form @submit.prevent="add()" id="add-form">
 			<div class="form-group">
 				<label for="name">Name</label>
@@ -28,7 +28,7 @@ export default{
 			if (this.loading) return;
 			this.loading = true;
 			var vm = this;
-			this.util.notify('Adding Partylist', 'loading')
+			this.util.notify('Adding Team Name', 'loading')
 			axios.post(config.API+'partylist', $('#add-form').serialize())
 				.then(response=>{
 					$.notifyClose();

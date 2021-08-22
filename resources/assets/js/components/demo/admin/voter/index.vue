@@ -4,13 +4,17 @@
 <div class="panel panel-default">
 	<div class="panel-body">
 
-		<div class="form-group">
+		<div class="form-group" style="display:inline-block">
 			<router-link class="btn btn-success" :to="{name:'Add Voter'}">
 				<i class="fa fa-plus"></i> Add Voter
 			</router-link>
 			<button class="btn btn-default" @click="refreshVoter()">
 				<i class="fa fa-refresh"></i> Refresh Voter
 			</button>
+		</div>
+		<div style="display:inline-block" class="pull-right">
+		<input class="form-control" type="search" style="height:33px" placeholder="Search Name..." @keyup="searchit" v-model="search">
+
 		</div>
 		<div class="table-responsive">
 			<table class="table table-hover" id="position_table">
@@ -23,7 +27,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="(voter,i) in data.voters.data">
+					<tr v-for="(voter,i) in data.voters.data" :key="voter.id">
 						<td>{{ voter.name }}</td>
 						<td>{{ voter.student_id }}</td>
 						<td>{{ voter.course }}</td>
@@ -80,16 +84,26 @@ export default{
 		return {
 			id: 0
 		}
+        search: ''
 	},
 
 	created: function () {
 		this.refreshVoter();
+		search: '';
 	},
 
 	methods: {
-		search: function () {
+	    searchit() {
+	    this.searchdata(this.search);
+	    },
 
-		},
+        searchdata:function(val){
+            axios.get(config.API+'voter/search/'+val).then(res => {
+                this.data.voters.data = res.data;
+                $.notifyClose();
+                console.log(res);
+            })
+        },
 
 		refreshVoter: function () {
 			var vm = this;

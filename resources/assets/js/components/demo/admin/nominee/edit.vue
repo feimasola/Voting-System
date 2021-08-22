@@ -50,9 +50,9 @@
 				</div>
 
 				<div class="form-group">
-					<label for="partylist_id">Partylist</label>
+					<label for="partylist_id">Team Name</label>
 					<select class="form-control" name="partylist_id" :value="nominee.partylist_id">
-						<option value="">--- Select Partylist (Optional) ---</option>
+						<option value="">--- Select Team Name (Optional) ---</option>
 						<option v-for="partylist in data.partylists" :value="partylist.id">{{ partylist.name}}</option>
 					</select>
 				</div>
@@ -89,7 +89,7 @@ export default{
 			if (this.loading) return;
 			var vm = this;
 			this.loading = true;
-			this.util.notify('Updating nominee', 'progress', 0);
+			this.util.notify('Updating Candidate', 'progress', 0);
 			$('#edit_form').ajaxSubmit({
 				success: function (response) {
 					$.notifyClose();
@@ -103,7 +103,7 @@ export default{
 					vm.util.showResult(error, 'error', 'ajax');
 				},
 				uploadProgress: function (a, b, c, progress) {
-					vm.util.notify('Updating Nominee', 'progress', progress);
+					vm.util.notify('Updating Candidate', 'progress', progress);
 				}
 			})
 		}

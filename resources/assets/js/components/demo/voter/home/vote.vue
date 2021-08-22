@@ -23,17 +23,19 @@
 					<thead>
 						<tr>
 							<th></th>
+							<th width="7%"></th>
 							<th>Name</th>
-							<th>Partylist</th>
+							<th>Team Name</th>
 							<th>Unit</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr v-for="nominee in data.nominees" v-if="nominee.position_id==position.id" @click="vote(position.id,nominee.id)">
-							<td><input type="radio" :name="position.id" :id="nominee.id"/></td>
-							<td>{{ nominee.name }}</td>
-							<td>{{ getPartylist(nominee.partylist_id) }}</td>
-							<td>{{ nominee.course }}</td>
+							<td><input type="radio" :name="position.id" :id="nominee.id" style="width:2em; height:2em; margin-top:2em;"></td>
+							<td><img :src="data.storageURL+nominee.image" style="height: 80px; width: 80px" class="thumbnail"/></td>
+							<td><p style="margin-top:2em;">{{ nominee.name }}</p></td>
+							<td><p style="margin-top:2em;">{{ getPartylist(nominee.partylist_id) }}</p></td>
+							<td><p style="margin-top:2em;">{{ nominee.course }}</p></td>
 						</tr>
 					</tbody>
 				</table>
@@ -89,7 +91,7 @@ export default{
 					$.notifyClose();
 					if (vm.util.showResult(response, 'success')){
 						vm.data.result = response.data.result;
-						vm.$router.push({name: 'Voter Home'});
+						vm.$router.push({name: 'Result'});
 					}
 
 				})
@@ -145,7 +147,7 @@ export default{
 			let partylists = this.data.partylists;
 			for (var i in partylists)
 				if (partylists[i]['id']==id) return partylists[i]['name'];
-			return 'No Partylist';
+			return 'No Team';
 		}
 	}
 }

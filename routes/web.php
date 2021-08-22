@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/{any}', function () {
     return view('index');
-});
+})->where('any', '.*');
 
-Route::get('/admin', function () {
-    return view('admin');
-});

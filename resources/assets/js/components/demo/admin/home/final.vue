@@ -1,14 +1,14 @@
 <template>
 <div class="container">
 	<div class="row">
-		<div class="col-md-12">
+		<div class="panel panel-default col-md-12">
 			<div v-for="position in positions">
 				<h5>{{ position.name }}</h5>
 				<div class="table-responsive">
 					<table class="table table-striped table-condensed">
 						<thead>
 							<tr>
-								<th width="15%">Civ HR Control nr</th>
+								<th width="12%">Civ HR Control nr</th>
 								<th width="30%">Name</th>
 								<th width="20%">Partylist</th>
 								<th width="20%">Unit</th>

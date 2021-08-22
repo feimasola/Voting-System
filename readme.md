@@ -30,7 +30,7 @@
 
 ## Language Used
 
-- PHP 5
+- PHP 5 (Note: This is not working on PHP v8 or higher)
 - Laravel 5.4 (Php Framework)
 - HTML
 - CSS
@@ -40,22 +40,23 @@
 
 ## Requirements
 
-- PHP 5 or higher
+- PHP 5 or higher ()
 - MySQL
 - Composer (To install Laravel and Other Dependencies)
 - NPM (To Compile Vue Components)
 
 ## Setting UP
 
-1. Run 'git clone https://github.com/lenard123/Voting-System'
-2. Run 'cd Voting-System'
-3. Run 'cp .env.example .env' or rename .env.example to .env
+1. Run `git clone https://github.com/lenard123/Voting-System`
+2. Run `cd Voting-System`
+3. Run `cp .env.example .env` or rename .env.example to .env
 4. Open .env file and Setup your database connection
-5. Run 'php artisan migrate --seed'
-6. Run 'php artisan storage:link'
-7. Run 'php artisan key:generate'
-8. Run 'php artisan passport:install'
-9. Finally run 'php artisan serve'
+5. Run `composer install`
+6. Run `php artisan migrate --seed`
+7. Run `php artisan storage:link`
+8. Run `php artisan key:generate`
+9. Run `php artisan passport:install`
+10. Finally run `php artisan serve`
 
 ### Note
 

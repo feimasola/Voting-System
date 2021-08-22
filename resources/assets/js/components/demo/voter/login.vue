@@ -60,7 +60,7 @@ export default{
 				 	if (this.util.showResult(response, 'success')) {
 				 		localStorage['Access Token'] = `Bearer ${response.data.token}`;
 						this.util.setAuthorization();
-				 		vm.$router.push({name: 'Voter Home'});
+				 		vm.$router.push({name: 'Vote'});
 				 	}
 				 })
 				 .catch(error => {

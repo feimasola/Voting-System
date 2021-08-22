@@ -6,10 +6,10 @@
 
 		<div class="form-group">
 			<router-link class="btn btn-success" :to="{name:'Add Partylist'}">
-				<i class="fa fa-plus"></i> Add Partylist
+				<i class="fa fa-plus"></i> Add Team Name
 			</router-link>
 			<button class="btn btn-default" @click="refreshPartylist()">
-				<i class="fa fa-refresh"></i> Refresh Partylist
+				<i class="fa fa-refresh"></i> Refresh Team Name
 			</button>
 		</div>
 
@@ -38,7 +38,7 @@
 						</td>
 					</tr>
 					<tr v-if="data.partylists.length < 1">
-						<td colspan="3">No Partylist</td>
+						<td colspan="3">No Team Name</td>
 					</tr>
 				</tbody>
 			</table>

@@ -1,6 +1,6 @@
 <template>
 <div class="container col-md-10 col-md-offset-1">
-	<h4>Manage Nominee</h4>
+	<h4>Manage Candidate</h4>
 	<router-view></router-view>
 </div>
 </template>

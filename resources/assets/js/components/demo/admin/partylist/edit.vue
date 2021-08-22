@@ -1,7 +1,7 @@
 <template>
 <div class="panel panel-default">
 	<div class="panel-body">
-		<h4>Edit Partylist</h4>
+		<h4>Edit Team</h4>
 		<form @submit.prevent="edit()" id="edit-form">
 			<div class="form-group">
 				<label for="name">Name</label>
@@ -35,7 +35,7 @@ export default{
 			if (this.loading) return;
 			this.loading = true;
 			var vm = this;
-			this.util.notify('Updating partylist', 'loading');
+			this.util.notify('Updating Team Name', 'loading');
 			axios.put(config.API+'partylist/'+this.data.partylist.id, $('#edit-form').serialize())
 				.then(response=>{
 					vm.loading = false;

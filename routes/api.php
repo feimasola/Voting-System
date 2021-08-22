@@ -78,7 +78,9 @@ Route::prefix('v1')->group(function(){ //Version 1 of my Rest API
 			Route::post('', 'API\v1\Voter\AddController');
 			Route::get('', 'API\v1\Voter\GetController');
 			Route::delete('{id}', 'API\v1\Voter\DeleteController');
-			Route::put('{id}', 'API\v1\Voter\UpdateController');	
+			Route::put('{id}', 'API\v1\Voter\UpdateController');
+			Route::get('search/{data}', 'API\v1\Voter\GetController@searchData');
+
 		});
 
 	});
